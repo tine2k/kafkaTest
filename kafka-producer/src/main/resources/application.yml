@@ -1,0 +1,18 @@
+spring.cloud.stream.default.producer.partitionKeyExpression: payload
+
+spring.cloud.stream.bindings.ticksOutput.destination: ticktocks
+spring.cloud.stream.bindings.ticksOutput.producer.partitionCount: 10
+spring.cloud.stream.bindings.ticksOutput.group: kafka-test
+
+spring.cloud.stream.kafka.bindings.ticksOutput.producer.sync: true
+
+logging:
+  level:
+    org.apache.kafka: info
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          auto-create-topics: true
+          auto-add-partitions: true

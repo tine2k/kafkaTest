@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  ka_zookeeper:
+    image: zookeeper:3.5
+
+  ka_kafka:
+    image: wurstmeister/kafka:1.0.0
+    volumes:
+      - /tmp/kafka:/kafka
+    environment:
+      JMX_PORT: 9999
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: "ka_zookeeper:2181"
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.0.9 
+    ports:
+      - 9092:9092
+
+  ka_manager:
+    image: sheepkiller/kafka-manager
+    ports:
+      - 9000:9000
+    environment:
+      - ZK_HOSTS=ka_zookeeper:2181
+
+networks:
+  default:
+    external:
+      name: ${DOCKER_NETWORK}
+

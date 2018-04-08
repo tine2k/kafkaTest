@@ -1,0 +1,8 @@
+spring.cloud.stream.default.group: consumer
+
+spring.cloud.stream.bindings.ticksInput.destination: ticktocks
+spring.cloud.stream.bindings.ticksInput.consumer.concurrency: 3
+
+logging:
+  level:
+    org.apache.kafka: info
